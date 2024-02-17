@@ -1,8 +1,8 @@
 const quizData = [
     {
-        question: "What is the capital of France?",
-        choices: ["Paris", "London", "Berlin", "Rome"],
-        correctAnswer: "Paris"
+        question: "Is this spam? Dear Voucher Holder, To claim this weeks offer, at you PC please go to http://www.e-tlp.co.uk/rewa",
+        choices: ["yes", "no"],
+        correctAnswer: "yes"
     },
     {
         question: "What is 2 + 2?",
