@@ -1,6 +1,8 @@
 from transformers import BertTokenizer, BertForSequenceClassification
-from torch.utils.data import DataLoader
-from transformers import AdamW
+import torch_optimizer as optim
+from transformers import torch.optim.AdamW
+import torch
+
 
 # Example data (replace with your labeled scam and non-scam data)
 texts = ["Congratulations! You've won a prize.", "This is a legitimate email."]
