@@ -1,36 +1,32 @@
+<<<<<<< HEAD
 from transformers import BertTokenizer, BertForSequenceClassification
-from torch.utils.data import DataLoader
-from transformers import AdamW
+import torch_optimizer as optim
+from transformers import torch.optim.AdamW
+import torch
 
-# Example data (replace with your labeled scam and non-scam data)
-texts = ["Congratulations! You've won a prize.", "This is a legitimate email."]
-labels = [1, 0]  # 1 for scam, 0 for non-scam
+=======
+import numpy as np
+import pandas as pd
+import torch
+import torch.nn as nn
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+import transformers
+from transformers import AutoModel, BertTokenizerFast
+>>>>>>> 76e254da6f19c0b4b1f92d246d2e2304ccca03d7
 
-# Tokenize input texts
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-tokenized_texts = tokenizer(texts, padding=True, truncation=True, return_tensors='pt')
+device = torch.device("cuda")
+df = pd.read_csv("/Users/ionaxia/Downloads/scam_data.csv")
 
-# Create DataLoader for efficient processing
-dataset = list(zip(tokenized_texts['input_ids'], tokenized_texts['attention_mask'], labels))
-dataloader = DataLoader(dataset, batch_size=1)
+df['label'].value_counts(normalize = True)
 
-# Load pre-trained BERT model for sequence classification
-model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
+train_text, temp_text, train_labels, temp_labels = train_test_split(df['text'], df['label'], 
+                                                                    random_state=2018, 
+                                                                    test_size=0.3, 
+                                                                    stratify=df['label'])
 
-# Training loop (adjust as needed)
-optimizer = AdamW(model.parameters(), lr=5e-5)
-for epoch in range(3):
-    for input_ids, attention_mask, label in dataloader:
-        outputs = model(input_ids, attention_mask=attention_mask, labels=label)
-        loss = outputs.loss
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad()
 
-# Inference (replace with your test data)
-test_texts = ["This seems suspicious."]
-tokenized_test_texts = tokenizer(test_texts, padding=True, truncation=True, return_tensors='pt')
-test_outputs = model(**tokenized_test_texts)
-predicted_labels = test_outputs.logits.argmax(dim=1).tolist()
-
-print("Predicted Labels:", predicted_labels)
+val_text, test_text, val_labels, test_labels = train_test_split(temp_text, temp_labels, 
+                                                                random_state=2018, 
+                                                                test_size=0.5, 
+                                                                stratify=temp_labels)
