@@ -125,7 +125,7 @@ model = model.to(device)
 optimizer = AdamW(model.parameters(),lr = 1e-5)
 
 #print(model.keys())
-model.load_state_dict(torch.load("/Users/ionaxia/Documents/best_model.pth"))
+#model.load_state_dict(torch.load("/Users/ionaxia/Documents/best_model.pth"))
 
 
 
@@ -151,7 +151,7 @@ onnx_path = "best_model.onnx"
 torch.onnx.export(model, inputs, onnx_path, verbose=True)
 
 #used to train/test model
-'''
+
 def evaluate():
     
     print("\nEvaluating...")
@@ -299,7 +299,7 @@ for epoch in range(epochs):
     print(f'Validation Loss: {valid_loss:.3f}')
 
 #used to save model
-torch.save(best_model_state, "best_model.pth")
+#torch.save(best_model_state, "best_model.pth")
 
 
 with torch.no_grad():
@@ -332,4 +332,4 @@ preds = preds.detach().cpu().numpy()
 preds = np.argmax(preds, axis = 1)
 
 print("Predicted Labels:", preds)
-'''
+
