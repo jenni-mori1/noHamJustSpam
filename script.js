@@ -1,6 +1,6 @@
 const quizData = [
     {
-        question: "Is this spam? Dear Voucher Holder, To claim this weeks offer, at you PC please go to http://www.e-tlp.co.uk/rewa",
+        question: "Is this a scam? Dear Voucher Holder, To claim this weeks offer, at you PC please go to http://www.e-tlp.co.uk/rewa",
         choices: ["yes", "no"],
         correctAnswer: "yes"
     },
