@@ -1,23 +1,22 @@
 body {
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  #quiz {
-    margin-bottom: 20px;
-  }
-  
-  #choices input {
-    margin-bottom: 10px;
-  }
-  
-  #results {
-    font-weight: bold;
-  }
-  
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+#quiz {
+  margin-bottom: 20px;
+}
+
+#choices input {
+  margin-bottom: 10px;
+}
+
+#results {
+  font-weight: bold;
+}
