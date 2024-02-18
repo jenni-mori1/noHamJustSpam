@@ -61,3 +61,25 @@ function showResult() {
       resultElement.innerHTML += "<p>Better luck next time!</p>";
   }
 }
+
+function sendText() {
+    // Get the entered text from the input field
+    var enteredText = document.getElementById("text-input").value;
+
+    // Send the entered text to the server using fetch API
+    fetch('/save-text', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: enteredText })
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Log the response from the server
+        // Handle the response from the server if needed
+    })
+    .catch(error => {
+        console.error('Error:', error); // Log any errors that occur
+    });
+}
