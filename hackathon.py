@@ -128,7 +128,7 @@ optimizer = AdamW(model.parameters(),lr = 1e-5)
 model.load_state_dict(torch.load("best_model.pth"))
 
 
-
+'''
 
 class_weights = compute_class_weight(class_weight = "balanced", classes = np.unique(train_labels), y = train_labels)
 
@@ -315,7 +315,7 @@ for i in range(len(test_text)):
     if preds[i] != labels[i]:
         print(preds[i], labels[i], text[i])
 #print(classification_report(test_y, preds))
-
+'''
 
 test_texts =["Hi grandma! I hope you are doing well! I wanted you to make me a blanket."]
 tokens_test2 = tokenizer.batch_encode_plus(
