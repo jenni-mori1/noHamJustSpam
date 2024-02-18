@@ -1,22 +1,35 @@
-const quizData = [
-  {
-      question: "Is this spam? Dear Voucher Holder, To claim this weeks offer, at you PC please go to http://www.e-tlp.co.uk/rewa",
-      choices: ["yes", "no"],
-      correctAnswer: "yes"
-  },
-  {
-      question: "What is 2 + 2?",
-      choices: ["3", "4", "5", "6"],
-      correctAnswer: "4"
-  },
-  // Add more questions here
-];
+const myForm = document.getElementById('textForm');
 
-const quizContainer = document.querySelector('.quiz-container');
-const questionElement = document.getElementById('question');
-const choicesElement = document.getElementById('choices');
-const submitButton = document.getElementById('submit-btn');
-const resultElement = document.getElementById('result');
+myForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('text.php', {
+        method: 'post',
+        body: formData
+    }).then(function(response) {
+        return response.text();
+    }).then(function(text) {
+        console.log(text);
+    }).catch(function(error) {   
+        console.error(error);
+    })
+
+});
+const quizData = [
+    {
+        question: "Is this spam? Dear Voucher Holder, To claim this weeks offer, at you PC please go to http://www.e-tlp.co.uk/rewa",
+        choices: ["yes", "no"],
+        correctAnswer: "yes"
+    },
+    {
+        question: "What is 2 + 2?",
+        choices: ["3", "4", "5", "6"],
+        correctAnswer: "4"
+    }
+    // Add more questions here
+];
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -24,57 +37,53 @@ let score = 0;
 loadQuestion();
 
 function loadQuestion() {
-  const currentQuestion = quizData[currentQuestionIndex];
-  questionElement.textContent = currentQuestion.question;
-  choicesElement.innerHTML = "";
-  currentQuestion.choices.forEach(choice => {
-      const li = document.createElement('li');
-      li.textContent = choice;
-      choicesElement.appendChild(li);
-      li.addEventListener('click', () => {
-          checkAnswer(choice);
-      });
-  });
+    const currentQuestion = quizData[currentQuestionIndex];
+    console.log(currentQuestion.question);
+    console.log("Choices:");
+    currentQuestion.choices.forEach(choice => {
+        console.log(choice);
+    });
+    // You can handle user input here in the console or write your own input logic
+    // For example:
+    // const userChoice = getUserChoice(); // Implement getUserChoice() to get user input
+    // checkAnswer(userChoice);
 }
 
 function checkAnswer(choice) {
-  const currentQuestion = quizData[currentQuestionIndex];
-  if (choice === currentQuestion.correctAnswer) {
-      score++;
-  }
-  currentQuestionIndex++;
-  if (currentQuestionIndex < quizData.length) {
-      loadQuestion();
-  } else {
-      showResult();
-  }
+    const currentQuestion = quizData[currentQuestionIndex];
+    if (choice === currentQuestion.correctAnswer) {
+        score++;
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
 }
 
 function showResult() {
-  quizContainer.style.display = 'none';
-  resultElement.textContent = `You scored ${score} out of ${quizData.length}.`;
-  if (score === quizData.length) {
-      resultElement.innerHTML += "<p>Wow! You got all questions right. Great job!</p>";
-  } else if (score >= quizData.length / 2) {
-      resultElement.innerHTML += "<p>Not bad! You got more than half of the questions right.</p>";
-  } else {
-      resultElement.innerHTML += "<p>Better luck next time!</p>";
-  }
+    console.log(`You scored ${score} out of ${quizData.length}.`);
+    if (score === quizData.length) {
+        console.log("Wow! You got all questions right. Great job!");
+    } else if (score >= quizData.length / 2) {
+        console.log("Not bad! You got more than half of the questions right.");
+    } else {
+        console.log("Better luck next time!");
+    }
 }
 
 function sendText() {
-    // Get the entered text from the input field
-    var enteredText = document.getElementById("text-input").value;
-
-    // Send the entered text to the server using fetch API
-    fetch('/save-text', {
+    // Example code for sending text to a server (you'll need to set up a server)
+    const enteredText = "Your text to send to the server";
+    fetch('http://your-server-url/save-text', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ text: enteredText })
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
         console.log(data); // Log the response from the server
         // Handle the response from the server if needed
