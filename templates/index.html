@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - For Scam/Ham</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+
+<head>
+	<meta http-equivalent="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href={{ url_for( 'static', filename='style.min.css' ) }}/>
+	<title>No Scam Only Ham</title>
+</head>
+
+<body>
+	<h1><a href= "/" style="text-decoration: none; color: inherit;">No Scam Only Ham</a></h1>
+	<div class="tabbed-menu">
+		<ul class="tabs">
+			<li id="tab1" class="selected">Predict</li>
+			<li id="tab2">Prevent</li>
+			<li id="tab3">Educate</li>
+		</ul>
+		<div class="contentWrapper">
+			<div class="content">
+				<div class="page" id="tab1" style="display:block;"><form id = "form" action="/predict" method="post">
+      <div class="form-container">
+        <div class="textarea-group">
+            <label for="string"/>
+          <textarea rows="8" placeholder="Type or paste" name="text"></textarea>
+        </div>
+
+      </div>
+      <div class="spacer"></div>
+      <button type="submit">Scam or Ham?</button>
+    </form> 
+    {% if prediction_text %}
+    <h3>{{ prediction_text }}</h3>
+    {% endif %}
+</div>
+				<div class="page" id="tab2" style="display:none;">
+					<p>Scam calls or texts are malignant forms of communication meant to deceive victims and obtain sensitive information and/or money.
+</p>
+					<p>Steps to prevent against scam:</p>
+					<ol>
+						<li>Be wary of suspicious text messages. Don't respond or interact.</li>
+						<li>Do not click on hyperlinks or attachments in suspect messages.</li>
+							<li>Take preventative measures to filter unwanted messages or block them before they reach you.</li>
+<li>Never give your credit card, banking, Social Security, Medicare, or any other personal and sensitive information over the phone unless you initiated the call.
+</li>
+					</ol>
+<p>Ham is harmless communication that is exchanged between different people. Ham is perfectly normal. We love social interaction.</p>
+				</div>
+				<div class="page" id="tab3" style="display:none;">
+					<a href="{{ url_for('static', filename='quiz.html') }}">
+    <button>Take Our Quiz!</button>
+</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<!-- partial -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='script.js')}}"></script>
+
+</body>
+</html>

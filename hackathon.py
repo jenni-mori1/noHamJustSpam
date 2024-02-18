@@ -10,7 +10,7 @@ from transformers import AdamW
 from sklearn.utils.class_weight import compute_class_weight
 import copy
 
-df = pd.read_csv("/Users/ionaxia/Downloads/spamdataset.csv")
+df = pd.read_csv("spamdataset.csv")
 device = torch.device("mps")
 
 df['Label'].value_counts(normalize = True)
@@ -125,7 +125,7 @@ model = model.to(device)
 optimizer = AdamW(model.parameters(),lr = 1e-5)
 
 #print(model.keys())
-model.load_state_dict(torch.load("/Users/ionaxia/Documents/best_model.pth"))
+model.load_state_dict(torch.load("best_model.pth"))
 
 
 
