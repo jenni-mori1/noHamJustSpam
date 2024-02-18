@@ -20,3 +20,9 @@ body {
 #results {
   font-weight: bold;
 }
+
+li.menu-items{
+  display:inline;
+  float:left;
+  color:#0D38D3;
+}
